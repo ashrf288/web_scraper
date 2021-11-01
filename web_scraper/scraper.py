@@ -9,7 +9,7 @@ history_of_mexico= f'{domain}/wiki/History_of_Mexico'
 
 def get_citations_needed_count(url):
     '''
-     Count function must be named get_citations_needed_count
+     
      get_citations_needed takes in a url and returns an integer
     '''
     resp=requests.get(url)
@@ -34,6 +34,6 @@ def get_citations_needed_report(url):
         paragraph_list+=f'{paragraph.text}\n'
     return paragraph_list
 
-print(get_citations_needed_count(history_of_mexico))
+# print(get_citations_needed_count(history_of_mexico))
 print(get_citations_needed_report(history_of_mexico))
 quit()
