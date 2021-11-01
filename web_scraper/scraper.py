@@ -35,5 +35,4 @@ def get_citations_needed_report(url):
     return paragraph_list
 
 # print(get_citations_needed_count(history_of_mexico))
-print(get_citations_needed_report(history_of_mexico))
-quit()
+# print(get_citations_needed_report(history_of_mexico))
