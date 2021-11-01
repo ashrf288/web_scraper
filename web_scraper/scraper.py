@@ -20,7 +20,7 @@ def get_citations_needed_count(url):
     parsed=BeautifulSoup(result,'html.parser')
     cites=parsed.find_all('a', { "title" : "Wikipedia:Citation needed"})
    
-    return cites
+    return len(cites)
 
 
 def get_citations_needed_report(url):
@@ -31,9 +31,9 @@ def get_citations_needed_report(url):
     paragraph_list=''
     for cite in cites:
         paragraph=cite.parent.parent.parent
-        # print(str(cite.parent.parent.parent).split('<'))
-        paragraph_list+=f'\n{paragraph.text}'
+        paragraph_list+=f'{paragraph.text}\n'
     return paragraph_list
 
+print(get_citations_needed_count(history_of_mexico))
 print(get_citations_needed_report(history_of_mexico))
 quit()
