@@ -1,10 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-
 domain='https://en.wikipedia.org'
-history_of_mexico= f'{domain}/wiki/History_of_Mexico'
-
-
 
 
 def get_citations_needed_count(url):
@@ -12,7 +8,8 @@ def get_citations_needed_count(url):
      
      get_citations_needed takes in a url and returns an integer
     '''
-    resp=requests.get(url)
+    history_of_mexico= f'{domain}/wiki/History_of_Mexico'
+    resp=requests.get(history_of_mexico)
     result=resp.text
     file=open('history_of_mexico.html','w')
     file.write(result)
@@ -24,15 +21,20 @@ def get_citations_needed_count(url):
 
 
 def get_citations_needed_report(url):
-    resp=requests.get(url)
-    result=resp.text
-    parsed=BeautifulSoup(result,'html.parser')
-    cites=parsed.find_all('a', { "title" : "Wikipedia:Citation needed"})
-    paragraph_list=''
-    for cite in cites:
-        paragraph=cite.parent.parent.parent
-        paragraph_list+=f'{paragraph.text}\n'
-    return paragraph_list
+    domain = url
+    citation_url = f"{domain}/wiki/History_of_Mexico"
+    res = requests.get(citation_url)
+    html_text = res.text
+    soup = BeautifulSoup(html_text, "html.parser")
+    citation = soup.find_all('a', { "title" : "Wikipedia:Citation needed"})
+    result_string=[]
+    for c in citation:
+        par=c.parent.parent.parent
+        result_string+=[par.text] 
+    return result_string    
+
 
 # print(get_citations_needed_count(history_of_mexico))
 # print(get_citations_needed_report(history_of_mexico))
+
+
